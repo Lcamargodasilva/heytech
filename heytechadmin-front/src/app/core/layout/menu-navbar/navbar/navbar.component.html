@@ -1,0 +1,21 @@
+<div class="header d-flex align-items-end justify-content-end" style="margin-right: 40px;">
+
+  <!-- <form class="d-flex" role="pesquisar">
+    <input class="form-control me-2" type="pesquisar" placeholder="Pesquisar" aria-label="Pesquisar">
+    <button class="btn btn-outline-primary" type="submit">Pesquisar</button>
+  </form> -->
+
+  <div class="header-dropdown ms-2">
+    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <img src="assets/imgs/user.png" alt="Usuário" style="padding: 5px;" width="50" height="50" class="rounded-circle me-2">
+      Lucas Camargo
+    </a>
+    <div class="dropdown-menu dropdown-menu-white text-small shadow" aria-labelledby="navbarDropdown">
+      <a class="dropdown-item cursor-pointer" (click)="openPerfil()"><i class="fas fa-user me-2"></i> Perfil</a>
+      <a class="dropdown-item cursor-pointer" (click)="openNotification()"><i class="fas fa-bell me-2"></i> Notificações</a>
+      <a class="dropdown-item cursor-pointer" (click)="openSuporteModal()"><i class="fas fa-phone me-2"></i> Suporte</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item cursor-pointer"><i class="fas fa-sign-out-alt me-2"></i> Sair</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="container rounded-box col-sm-10">
+  <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h3><img src="assets/imgs/usuarios.png" alt="Usuarios"> Usuários</h3>
+
+        <form class="d-flex">
+          <input class="form-control me-2" type="text" placeholder="Pesquisar" aria-label="Pesquisar" (input)="search($event)">
+          <button class="btn btn-outline-primary" type="submit">Pesquisar</button>
+        </form>
+
+
+      <div>
+        <button type="button" class="btn btn-primary" (click)="novoModal()">Novo Usuário</button>
+        <button type="button" class="btn btn-secondary" (click)="onRefresh()"><i class="fas fa-sync"></i> Atualizar</button>
+      </div>
+    </div>
+    <div class="card-body">
+      <table class="table table-hover" *ngIf="usuarios$ | async as usuarios; else loadingNoError">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Nome</th>
+            <th>Usuário</th>
+            <th>Email</th>
+            <th>Função</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let usuario of usuarios">
+            <td><img src="assets/imgs/user.png" alt="Usuário" width="50px" height="50px" class="rounded-circle me-2"></td>
+            <td style="padding-top: 20px;"> {{ usuario.nome }} </td>
+            <td style="padding-top: 20px;">{{ usuario.usuario }}</td>
+            <td style="padding-top: 20px;">{{ usuario.email }}</td>
+            <td style="padding-top: 20px;">{{ usuario.role }}</td>
+            <td>
+              <div class="btn-group" role="group">
+                <button class="btn btn-outline-warning btn-sm" (click)="editarModal(usuario)"><i class="fas fa-edit"></i></button>
+                <button class="btn btn-outline-danger btn-sm" (click)="onDelete(usuario)"><i class="fas fa-trash"></i></button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <ng-template #loadingNoError>
+    <div *ngIf="error$ | async; else loading">
+      <div class="d-flex justify-content-center">
+        <span class="loader"></span>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #loading>
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border" role="status">
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #deleteModal>
+    <div class="modal-body text-center">
+      <p>Tem certeza que deseja remover o usuário?</p>
+      <button type="button" class="btn btn-default" (click)="onConfirmDelete()">Sim</button>
+      <button type="button" class="btn btn-primary" (click)="onDeclineDelete()">Não</button>
+    </div>
+  </ng-template>
+</div>

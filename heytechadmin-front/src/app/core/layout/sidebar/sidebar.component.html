@@ -1,0 +1,58 @@
+<nav class="sidebar" [ngClass]="{'collapsed': isCollapsed}">
+  <div class="sidebar-header">
+    <h3>
+      <a routerLink="/"><img class="logo-image" src="assets/imgs/logo.png" alt="logo"></a>
+    </h3>
+  </div>
+  <ul class="list-unstyled components">
+    <li>
+      <a routerLinkActive="active" [routerLink]="['/dashboard']" [routerLinkActiveOptions]="{ exact: true }">
+        <i class="fa-solid fa-chart-pie"></i>
+        <span class="menu-description">Dashboard</span>
+      </a>
+    </li>
+
+    <li>
+      <a routerLinkActive="active" routerLink="/produtos">
+        <i class="fa-solid fa-boxes-stacked"></i>
+        <span class="menu-description">Estoque</span>
+      </a>
+    </li>
+
+    <li>
+      <a routerLinkActive="active" routerLink="/faturamento/vendas">
+        <i class="fa-solid fa-money-bill-trend-up"></i>
+        <span class="menu-description">Vendas</span>
+      </a>
+    </li>
+
+    <!-- <li data-bs-toggle="collapse" data-bs-target="#collapseFaturamento" aria-expanded="false" aria-controls="collapseFaturamento">
+      <a routerLinkActive="active">
+        <i class="fa-solid fa-file-invoice-dollar"></i>
+        <span class="menu-description dropdown-toggle">Faturamento</span>
+      </a>
+       <div class="collapse" id="collapseFaturamento">
+        <ul class="list-unstyled">
+          <li><a routerLinkActive="active" routerLink="/faturamento/vendas"><i class="fa-solid fa-money-bill-trend-up"></i> Vendas</a></li>
+           <li><a routerLinkActive="active" routerLink="/faturamento/pedidos"><i class="fas fa-gift"></i> Pedidos</a></li>
+        </ul>
+      </div>
+    </li>
+ -->
+
+    <li data-bs-toggle="collapse" data-bs-target="#collapseClientesUsuarios" aria-expanded="false" aria-controls="collapseClientesUsuarios">
+      <a routerLinkActive="active">
+        <i class="fa-solid fa-users-gear"></i>
+        <span class="menu-description dropdown-toggle">Pessoal</span>
+      </a>
+      <div class="collapse" id="collapseClientesUsuarios">
+        <ul class="list-unstyled">
+          <li><a routerLinkActive="active" routerLink="/pessoal/clientes"><i class="fa-solid fa-user-group"></i> Clientes</a></li>
+          <li><a routerLinkActive="active" routerLink="/pessoal/usuarios"><i class="fa-solid fa-circle-user"></i> Usuários</a></li>
+        </ul>
+      </div>
+    </li>
+
+
+  </ul>
+</nav>

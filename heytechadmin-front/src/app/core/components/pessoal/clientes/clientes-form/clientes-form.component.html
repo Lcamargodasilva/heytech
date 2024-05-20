@@ -1,0 +1,45 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{ editarCliente ? 'Editar Cliente' : 'Novo Cliente' }}</h4>
+  <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="fecharModal()"></button>
+</div>
+
+<div class="modal-body">
+  <form class="row g-3 needs-validation" novalidate [formGroup]="form" (submit)="onSubmit()">
+
+    <div class="md-3">
+      <label for="nome" class="form-label">Nome completo: <span style="color: red; ">*</span></label>
+      <input type="text" class="form-control" id="nome" placeholder="*********" formControlName="nome"
+        [ngClass]="{'is-invalid': submitted && form.get('nome')?.invalid && form.get('nome')?.touched}">
+      <div *ngIf="form.get('nome')?.invalid && form.get('nome')?.touched" class="invalid-feedback">
+        Por favor, insira o nome do usuário.
+      </div>
+    </div>
+
+    <div class="md-3">
+      <label for="email" class="form-label">Email: <span style="color: red; ">*</span></label>
+      <input type="text" class="form-control" id="email" placeholder="email@gmail.com" formControlName="email"
+        [ngClass]="{'is-invalid': submitted && form.get('email')?.invalid && form.get('email')?.touched}">
+      <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="invalid-feedback">
+        Por favor, insira um email válido.
+      </div>
+    </div>
+
+    <div class="md-3">
+      <label for="telefone" class="form-label">Telefone: <span style="color: red; ">*</span></label>
+      <input type="text" class="form-control" id="telefone" placeholder="(xx) xxxx-xxxx" formControlName="telefone"
+        [ngClass]="{'is-invalid': submitted && form.get('telefone')?.invalid && form.get('telefone')?.touched}"
+        [value]="form.get('telefone')?.value | celular">
+      <div *ngIf="form.get('telefone')?.invalid && form.get('telefone')?.touched" class="invalid-feedback">
+        Por favor, insira um número de telefone válido.
+      </div>
+    </div>
+
+
+
+    <div>
+      <button type="submit" class="btn btn-primary">Salvar</button>
+      <button type="button" class="btn btn-secondary" (click)="onCancel()">Limpar</button>
+    </div>
+
+  </form>
+</div>

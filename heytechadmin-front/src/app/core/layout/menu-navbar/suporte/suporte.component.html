@@ -1,0 +1,39 @@
+<div class="modal-content">
+  <div class="modal-header">
+<div class="container">
+  <h1 class="mt-4">Entre em Contato com o Suporte</h1><br>
+
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+    <div class="form-group" [class.needs-validation]="!nome.valid && nome.touched"
+      [class.was-validated]="!nome.valid && nome.touched">
+      <label for="nome" class="form-label">Nome: <span style="color: red;"><strong>*</strong></span></label>
+      <input type="text" class="form-control" id="nome" placeholder="Nome" name="nome"
+        [(ngModel)]="usuario.nome" required #nome="ngModel" />
+
+      <p *ngIf="!nome.valid && nome.touched" class="text-danger mt-2" role="alert"><i class="fa-regular fa-bell fa-shake"></i>
+        Nome é obrigatório.
+      </p>
+    </div>
+    <div class="form-group" [class.needs-validation]="!email.valid && email.touched"
+      [class.was-validated]="!email.valid && email.touched">
+      <label for="email" class="form-label">Email: <span style="color: red;"><strong>*</strong></span></label>
+      <input type="email" class="form-control" id="email" placeholder="nome@email.com" name="email"
+        [(ngModel)]="usuario.email" required email #email="ngModel" />
+
+      <p *ngIf="!email.valid && email.touched" class="text-danger mt-2" role="alert"><i class="fa-regular fa-bell fa-shake"></i>
+        Email é obrigatório.
+      </p>
+    </div>
+    <div class="form-group">
+      <label for="mensagem">Mensagem:</label>
+      <textarea class="form-control" id="mensagem" name="mensagem" rows="4" required></textarea>
+    </div><br>
+
+    <button type="submit" class="btn btn-primary" [disabled]="!f.valid">
+      <i class="fas fa-paper-plane"></i> Enviar
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="bsModalRef.hide()"><i class="fa-solid fa-xmark"></i> Cancelar</button>
+  </form>
+</div>
+</div>
+</div>

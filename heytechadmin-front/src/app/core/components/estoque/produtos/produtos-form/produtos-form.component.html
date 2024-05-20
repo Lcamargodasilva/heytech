@@ -1,0 +1,78 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{ editarProduto ? 'Editar Produto' : 'Novo Produto' }}</h4>
+  <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="fecharModal()">
+  </button>
+</div>
+<div class="modal-body">
+  <form class="row g-3 needs-validation" novalidate [formGroup]="form">
+
+    <div class="md-3">
+      <label for="codigo" class="form-label">Código de barras: <span style="color: red; ">*</span></label>
+      <input type="text" class="form-control" id="codigo" placeholder="*********" formControlName="codigo"
+        [ngClass]="{'is-invalid': submitted && hasError('codigo')}">
+      <div *ngIf="hasError('codigo')" class="invalid-feedback">
+        <div *ngIf="form.controls['codigo'].errors?.['required']">
+          Por favor, insira o código de barras do produto.
+        </div>
+        <div *ngIf="form.controls['codigo'].errors?.['pattern']">
+          O código de barras deve conter apenas números.
+        </div>
+      </div>
+    </div>
+
+    <div class="md-3">
+      <label for="nome" class="form-label">Descrição: <span style="color: red; ">*</span></label>
+      <input type="text" class="form-control" id="nome" placeholder="*********" formControlName="nome"
+        [ngClass]="{'is-invalid': submitted && hasError('nome')}">
+      <div *ngIf="hasError('nome')" class="invalid-feedback">
+        <div *ngIf="form.controls['nome'].errors?.['required']">
+          Por favor, insira a descrição do produto.
+        </div>
+        <div *ngIf="form.controls['nome'].errors?.['minlength']">
+          Mínimo 3 caracteres.
+        </div>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <label for="preco" class="form-label">Preço: <span style="color: red; ">*</span></label>
+      <input type="text" class="form-control" id="preco" placeholder="00,00" formControlName="preco"
+        [ngClass]="{'is-invalid': submitted && hasError('preco')}"
+        [value]="form.get('preco')?.value | currency : 'BRL': true">
+      <div *ngIf="hasError('preco')" class="invalid-feedback">
+        <div *ngIf="form.controls['preco'].errors?.['required']">
+          Por favor, insira o preço do produto.
+        </div>
+        <div *ngIf="form.controls['preco'].errors?.['min']">
+          O preço tem que ser maior que 0.
+        </div>
+        <div *ngIf="form.controls['preco'].errors?.['pattern']">
+          Insira um valor numérico válido para o preço.
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <label for="qtidadeEstoque" class="form-label">qtidadeEstoque: <span style="color: red; ">*</span></label>
+      <input type="text" class="form-control" id="qtidadeEstoque" placeholder="*********" formControlName="qtidadeEstoque"
+        [ngClass]="{'is-invalid': submitted && hasError('qtidadeEstoque')}">
+      <div *ngIf="hasError('qtidadeEstoque')" class="invalid-feedback">
+        <div *ngIf="form.controls['qtidadeEstoque'].errors?.['required']">
+          Por favor, insira a qtidadeEstoque do produto.
+        </div>
+        <div *ngIf="form.controls['qtidadeEstoque'].errors?.['pattern']">
+          A qtidadeEstoque deve conter apenas números.
+        </div>
+        <div *ngIf="form.controls['qtidadeEstoque'].errors?.['min']">
+          A qtidadeEstoque tem que ser maior que 0.
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <button type="submit" class="btn btn-primary" (click)="onSubmit()">Salvar</button>
+      <button type="button" class="btn btn-secondary" (click)="onCancel()">Limpar</button>
+    </div>
+
+  </form>
+</div>

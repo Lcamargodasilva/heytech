@@ -1,0 +1,74 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{ editarUsuario ? 'Editar Usuario' : 'Novo Usuario' }}</h4>
+  <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="fecharModal()"></button>
+</div>
+
+<div class="modal-body">
+  <form class="row g-3 needs-validation" novalidate [formGroup]="form" (submit)="onSubmit()">
+
+    <div class="md-3">
+      <label for="nome" class="form-label">Nome completo: <span style="color: red; ">*</span></label>
+      <input type="text" class="form-control" id="nome" placeholder="*********" formControlName="nome"
+        [ngClass]="{'is-invalid': submitted && form.get('nome')?.invalid && form.get('nome')?.touched}">
+      <div *ngIf="form.get('nome')?.invalid && form.get('nome')?.touched" class="invalid-feedback">
+        Por favor, insira o nome do usuário.
+      </div>
+    </div>
+
+    <div class="md-3">
+      <label for="usuario" class="form-label">Usuario para login: <span style="color: red; ">*</span></label>
+      <input type="text" class="form-control" id="usuario" placeholder="*********" formControlName="usuario"
+        [ngClass]="{'is-invalid': submitted && form.get('usuario')?.invalid && form.get('usuario')?.touched}">
+      <div *ngIf="form.get('usuario')?.invalid && form.get('usuario')?.touched" class="invalid-feedback">
+        Por favor, insira o usuário para fazer login no sistema.
+      </div>
+    </div>
+
+    <div class="md-3">
+      <label for="email" class="form-label">Email: <span style="color: red; ">*</span></label>
+      <input type="text" class="form-control" id="email" placeholder="email@gmail.com" formControlName="email"
+        [ngClass]="{'is-invalid': submitted && form.get('email')?.invalid && form.get('email')?.touched}">
+      <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="invalid-feedback">
+        Por favor, insira um email válido.
+      </div>
+    </div>
+
+    <div class="md-3">
+      <label for="senha" class="form-label">Senha: <span style="color: red; ">*</span></label>
+      <input type="password" class="form-control" id="senha" placeholder="*********" formControlName="senha"
+        [ngClass]="{'is-invalid': submitted && form.get('senha')?.invalid && form.get('senha')?.touched}">
+      <div *ngIf="form.get('senha')?.invalid && form.get('senha')?.touched" class="invalid-feedback">
+        A senha é obrigatória.
+      </div>
+    </div>
+
+    <div class="md-3">
+      <label for="confirmacaoSenha" class="form-label">Confirmar senha: <span style="color: red; ">*</span></label>
+      <input type="password" class="form-control" id="confirmacaoSenha" placeholder="*********" formControlName="confirmacaoSenha"
+        [ngClass]="{'is-invalid': submitted && form.get('confirmacaoSenha')?.invalid && form.get('confirmacaoSenha')?.touched}">
+      <div *ngIf="form.get('confirmacaoSenha')?.invalid && form.get('confirmacaoSenha')?.touched" class="invalid-feedback">
+        A confirmação da senha é obrigatória e deve ser igual à senha.
+      </div>
+    </div>
+
+
+    <div class="md-3">
+      <label for="role" class="form-label">Role: <span style="color: red; ">*</span></label>
+      <select class="form-select" id="role" formControlName="role" [ngClass]="{'is-invalid': submitted && form.get('role')?.invalid && form.get('role')?.touched}">
+        <option value="">Selecione uma opção</option>
+        <option value="USER">Usuário</option>
+        <option value="ADMIN">Administrador</option>
+      </select>
+      <div *ngIf="form.get('role')?.invalid && form.get('role')?.touched" class="invalid-feedback">
+        Por favor, selecione a função do usuário.
+      </div>
+    </div>
+
+
+    <div>
+      <button type="submit" class="btn btn-primary">Salvar</button>
+      <button type="button" class="btn btn-secondary" (click)="onCancel()">Limpar</button>
+    </div>
+
+  </form>
+</div>

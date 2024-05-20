@@ -1,0 +1,94 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 200px;
+  background-color: #10116B;
+  transition: all 0.3s;
+  overflow-x: hidden;
+}
+
+.sidebar.collapsed {
+  width: 70px;
+}
+
+.sidebar i {
+  font-size: 20px;
+}
+
+.sidebar.collapsed i {
+  font-size: 24px;
+}
+
+.sidebar-header {
+  text-align: center;
+  color: white;
+  padding: 15px 0;
+}
+
+.sidebar-header {
+  text-align: center;
+  color: white;
+  padding: 15px 0;
+}
+
+.dashboard-title {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.sidebar.collapsed .dashboard-title {
+  display: none;
+}
+
+.list-unstyled {
+  padding: 0;
+}
+
+.list-unstyled li {
+  margin-bottom: 10px;
+}
+
+.list-unstyled li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+}
+
+.list-unstyled li a:hover {
+  background-color: #10116B;
+  color: white;
+}
+
+.list-unstyled li a.active {
+  background-color: #075fd3;
+  color: white;
+}
+
+.list-unstyled li i {
+  margin-right: 10px;
+}
+
+.menu-description {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.logo-image {
+  width: 120px;
+  height: 120px;
+  transition: all 0.3s;
+}
+
+
+.list-unstyled li a:hover {
+  background-color: #4685d6;
+  color: white;
+  cursor: pointer;
+}
+
+.list-unstyled li a.menu-description:hover {
+  color: #4685d6;
+}

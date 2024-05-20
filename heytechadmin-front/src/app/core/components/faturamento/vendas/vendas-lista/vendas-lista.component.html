@@ -1,0 +1,71 @@
+<div class="container rounded-box col-sm-10">
+  <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h1><img src="assets/imgs/vendas.png" alt="Vendas"> Vendas</h1>
+      <div>
+        <button type="button" class="btn btn-primary" (click)="novoModal()">Nova venda</button>
+        <button type="button" class="btn btn-secondary" (click)="onRefresh()"><i class="fas fa-sync"></i> Atualizar</button>
+      </div>
+    </div>
+    <div class="card-body">
+      <table class="table table-hover" *ngIf="vendas$ | async as vendas; else loadingNoError">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Status</th>
+            <th>Cliente</th>
+            <th>Desconto</th>
+            <th>Valor total</th>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let venda of vendas">
+            <td></td>
+            <td><i class="fas fa-check-circle fa-2x text-success"></i></td>
+            <td style="padding-top: 20px;">{{ venda.cliente.nome }}</td>
+            <td style="padding-top: 20px;">implementar</td>
+            <td style="padding-top: 20px;">implementar</td>
+            <td style="padding-top: 20px;" *ngFor="let produto of venda.produtos">{{ produto.nome }}</td>
+            <td style="padding-top: 20px;">implementar</td>
+            <td></td>
+            <td></td>
+            <td>
+              <div class="btn-group" role="group">
+                <button class="btn btn-outline-warning btn-sm" (click)="editarModal(venda)"><i class="fas fa-edit"></i> Editar</button>
+                <button class="btn btn-outline-danger btn-sm" (click)="onDelete(venda)"><i class="fas fa-trash"></i> Excluir</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <ng-template #loadingNoError>
+    <div *ngIf="error$ | async; else loading">
+      <div class="d-flex justify-content-center">
+        <span class="loader"></span>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #loading>
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border" role="status">
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #deleteModal>
+    <div class="modal-body text-center">
+      <p>Tem certeza que deseja remover a venda?</p>
+      <button type="button" class="btn btn-default" (click)="onConfirmDelete()">Sim</button>
+      <button type="button" class="btn btn-primary" (click)="onDeclineDelete()">Não</button>
+    </div>
+  </ng-template>
+</div>

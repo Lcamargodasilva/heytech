@@ -1,0 +1,63 @@
+<div class="background">
+  <div class="container d-flex justify-content-center align-items-center">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-5">
+          <div class="card rounded-box">
+            <div class="card-body">
+              <div class="text-center">
+                <img src="assets/imgs/logo.png" alt="login" style="width: 150px; height: 150px;"><br>
+              </div>
+              <p class="text-center" style="padding-top: 10px; font-size: 30px;">Login</p>
+              <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+                <div class="mb-4 form-group" [class.needs-validation]="!nome.valid && nome.touched" [class.was-validated]="!nome.valid && nome.touched">
+                  <label for="login" class="form-label"><i class="fa fa-user"></i> Usuário: <span style="color: red;"><strong>*</strong></span></label>
+                  <div class="input-group">
+                    <input [(ngModel)]="login.nome" type="text" class="form-control" id="login" name="login" required #nome="ngModel">
+                  </div>
+                  <p *ngIf="!nome.valid && nome.touched" class="text-danger mt-2" role="alert"><i class="fa-regular fa-bell fa-shake"></i>
+                    Usuário é obrigatório.
+                  </p>
+                </div>
+                <div class="mb-3 form-group" [class.needs-validation]="!senha.valid && senha.touched" [class.was-validated]="!senha.valid && senha.touched">
+                  <label for="senha" class="form-label"><i class="fa fa-lock"></i> Senha: <span style="color: red;"><strong>*</strong></span></label>
+                  <div class="input-group">
+                    <input [(ngModel)]="login.senha" [type]="senhaVisivel ? 'text' : 'password'" class="form-control" id="senha" name="senha" required #senha="ngModel">
+                    <button type="button" class="btn btn-outline-secondary" (click)="toggleSenhaVisibility()">
+                      {{ senhaVisivel ? 'Ocultar Senha' : 'Mostrar Senha' }}
+                    </button>
+                  </div>
+                  <p *ngIf="!senha.valid && senha.touched" class="text-danger mt-2" role="alert"><i class="fa-regular fa-bell fa-shake"></i>
+                    Senha é obrigatória.
+                  </p>
+                </div>
+                <div class="mb-3 form-group">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="lembrarSenha" [(ngModel)]="lembrarSenha" name="lembrarSenha">
+                    <label class="form-check-label" for="lembrarSenha">
+                      Lembrar Senha
+                    </label>
+                  </div>
+                </div>
+                <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary btn-wide btn-block mb-3" (click)="fazerLogin()" [disabled]="!f.valid">
+                  <i class="fa fa-sign-in"></i> Entrar
+                </button>
+              </div>
+                <div class="text-center mb-2 forgot-password">
+                  <button type="button" class="no-underline btn btn-link" (click)="openSenha()">Esqueceu a senha?</button>
+                </div>
+                <!-- Se precisar colocar o cadastrar
+
+                <div class="text-center mb-3 signup-link">
+                  <button type="button" class="no-underline btn btn-link" (click)="openModal()">Cadastrar-se</button>
+                </div>-->
+                <p class="mb-0 text-center">&copy; Gest Paulinos - Sistema próprio de gestão</p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,155 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{ editarVenda ? 'Editar a venda' : 'Realizar uma venda' }}</h4>
+  <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="fecharModal()">
+  </button>
+</div>
+<div class="modal-body">
+  <form class="row g-3 needs-validation" novalidate #formDir="ngForm">
+    <div class="md-3">
+      <label for="adicionarProduto">Adicionar Produto <span style="color: red;">*</span></label><br>
+      <button type="button" class="btn btn-outline-secondary" (click)="produtosModal(modalProdutos)">
+        <i class="fa-solid fa-plus"></i>
+      </button>
+    </div>
+
+    <div *ngIf="produtosSelecionados.length > 0" class="md-3 mt-3">
+      <label>Produtos Adicionados:</label>
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let produto of produtosSelecionados">
+            <td style="padding-top: 15px;">{{ produto.produto.nome }}</td>
+            <td style="padding-top: 15px;">{{ produto.qtidadeVendida }}</td>
+            <td style="padding-top: 15px;">
+              <button type="button" class="btn btn-link text-danger" (click)="removerProduto(produto.produto)">
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+            
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="form-group col-6">
+      <label for="clienteId" class="form-label">Nome do cliente: <span style="color: red;">*</span></label>
+      <button type="button" class="btn" (click)="clientePesquisa(modalCliente)">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+      <input type="hidden" id="clienteId" name="clienteId" [(ngModel)]="form.clienteId" required>
+      <input type="text" class="form-control" id="clienteNome" name="clienteNome" [(ngModel)]="form.clienteNome">
+    </div>
+
+
+    <div class="col-6">
+      <label for="preco" class="form-label">Desconto:</label>
+      <input type="text" class="form-control" id="preco" placeholder="00,00" name="preco" [(ngModel)]="form.preco"
+        #preco="ngModel" required pattern="^\d+(\.\d{1,2})?$">
+    </div>
+
+    <div class="md-3">
+      <label>Desconto Aplicado:</label>
+      <p style="padding: 5px;"><strong>{{ form.preco }} %</strong></p>
+    </div>
+
+    <div class="md-3 mt-3">
+      <label>Total da venda:</label>
+      <p style="padding: 5px;"><strong>{{ calcularValorTotalVenda() | currency: 'BRL': true }}</strong></p>
+    </div>
+
+    <div>
+      <button type="submit" class="btn btn-primary" (click)="onSubmit()" [disabled]="formDir.invalid">Salvar</button>
+      <button type="button" class="btn btn-secondary" (click)="cancelarFormulario()">Cancelar</button>
+    </div>
+  </form>
+
+
+  <ng-template #modalProdutos let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title pull-left">Pesquisar produto</h5>
+    </div>
+    <div class="modal-body">
+      <input class="form-control me-2" type="text" placeholder="PesquisarProduto" aria-label="PesquisarProduto"
+        [(ngModel)]="termoPesquisa" (ngModelChange)="pesquisarProdutos()">
+      <br>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Preço</th>
+            <th>Quantidade</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let produto of produtos">
+            <td style="padding-top: 15px;">{{ produto.nome }}</td>
+            <td style="padding-top: 15px;">{{ produto.preco | currency: 'BRL': true}}</td>
+            <td><input class="form-control form-control-sm" type="type" name="qtidadeLancada" placeholder="Quantidade"
+                [(ngModel)]="qtidadeLancada"></td>
+            <td><button class="btn btn-outline-primary btn-sm"
+                (click)="adicionarProduto(produto, qtidadeLancada)">Adicionar</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <button type="button" class="btn btn-outline-secondary" (click)="fecharModalProdutos()">Cancelar</button>
+    </div>
+  </ng-template>
+
+  <ng-template #modalCliente>
+    <div class="modal-header">
+      <h5 class="modal-title pull-left">Pesquisar cliente</h5>
+    </div>
+    <div class="modal-body">
+      <input class="form-control me-2" type="text" placeholder="Pesquisar" aria-label="Pesquisar"
+        [(ngModel)]="termoPesquisa" (ngModelChange)="pesquisarClientes()">
+      <br>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Telefone</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cliente of clientes">
+            <td style="padding-top: 15px;">{{ cliente.nome }}</td>
+            <td style="padding-top: 15px;">{{ cliente.email }}</td>
+            <td style="padding-top: 15px;">{{ cliente.telefone }}</td>
+            <td><button class="btn btn-outline-primary btn-sm" (click)="selecionarCliente(cliente)">Adicionar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <button type="button" class="btn btn-outline-secondary" (click)="fecharModalProdutos()">Cancelar</button>
+    </div>
+  </ng-template>
+
+
+
+  <!--
+      <div class="md-3">
+      <label for="produtosId" class="form-label">Código do produto: <span style="color: red; ">*</span></label>
+      <input type="text" class="form-control" id="produtosId" placeholder="*********" formControlName="produtosId"
+        [ngClass]="{'is-invalid': submitted && hasError('produtosId')}">
+      <div *ngIf="hasError('produtosId')" class="invalid-feedback">
+        <div *ngIf="form.controls['produtosId'].errors?.['required']">
+          Por favor, insira o código interno do produto.
+        </div>
+        <div *ngIf="form.controls['produtosId'].errors?.['pattern']">
+          O código deve conter apenas números.
+        </div>
+      </div>
+    </div>
+-->

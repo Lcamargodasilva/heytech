@@ -1,0 +1,20 @@
+<div class="modal-header">
+  <img src="assets/imgs/logo.png" alt="login" style="width: 50px; height: 50px;">
+  <h4 class="modal-title" style="margin-left: 10px;">Recuperar senha</h4>
+  <button type="button" class="btn btn-close" (click)="bsModalRef.hide()"></button>
+</div>
+<div class="modal-body">
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+    <div class="form-group" [class.needs-validation]="!email.valid && email.touched"
+    [class.was-validated]="!email.valid && email.touched">
+    <label for="email" class="form-label">Email: <span style="color: red;"><strong>*</strong></span></label>
+    <input type="email" class="form-control" id="email" placeholder="nome@email.com" name="email"
+        [(ngModel)]="usuario.email" required email #email="ngModel" />
+
+    <div *ngIf="!email.valid && email.touched" class="text-danger mt-2" role="alert"><i class="fa-regular fa-bell fa-shake"></i>
+        Email é obrigatório.
+    </div>
+      <button type="submit" class="btn btn-primary mt-4" [disabled]="!f.valid"><i class="fa-solid fa-paper-plane"></i> Enviar</button>
+    </div>
+  </form>
+</div>

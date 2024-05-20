@@ -1,0 +1,9 @@
+.forgot-password a,
+.signup-link a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.background {
+  padding: 125px;
+}
